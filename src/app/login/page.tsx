@@ -7,16 +7,31 @@ import Image from "next/image";
 import From from "@/components/Forms/From";
 import FromInput from "@/components/Forms/FromInput";
 import { SubmitHandler } from "react-hook-form";
+import { useUserLoginMutation } from "@/redux/api/authApi";
+import { isLoggedIn, storeUserInfo } from "@/services/auth.service";
+import { useRouter } from "next/navigation";
+
 
 type FromValues = {
   id: string;
   password: string;
 };
 const LoginPage = () => {
-  const onSubmit: SubmitHandler<FromValues> = (data) => {
+  // console.log(isLoggedIn());
+  const router = useRouter();
+  const [userLogin] = useUserLoginMutation();
+  const onSubmit: SubmitHandler<FromValues> = async (data: any) => {
     try {
-      console.log(data);
-    } catch (error) {}
+      const res = await userLogin({ ...data }).unwrap();
+      console.log(res);
+      if (res?.accessToken) {
+        router.push("/profile");
+      }
+      storeUserInfo({ accessToken: res?.accessToken });
+      // console.log(res.data.accessToken);
+    } catch (error: any) {
+      console.error(error.message);
+    }
   };
   return (
     <Row
