@@ -11,38 +11,39 @@ const Sidebar = () => {
 
   // const role = USER_ROLE.STUDENT;
   const { role } = getUserInfo() as any;
-  console.log(role);
   return (
-    <Sider
-      collapsible
-      collapsed={collapsed}
-      onCollapse={(value) => setCollapsed(value)}
-      width={280}
-      style={{
-        overflow: "auto",
-        height: "100vh",
-        position: "sticky",
-        left: 0,
-        top: 0,
-        bottom: 0,
-      }}>
-      <div
+    // <div style={{ border: "1px solid red", padding: "50px" }}>
+      <Sider
+        collapsible
+        collapsed={collapsed}
+        onCollapse={(value) => setCollapsed(value)}
+        width={280}
         style={{
-          color: "white",
-          fontSize: "2rem",
-          textAlign: "center",
-          fontWeight: "bold",
-          marginBottom: "1rem",
+          overflow: "auto",
+          height: "100vh",
+          position: "sticky",
+          left: 0,
+          top: 0,
+          bottom: 0,
         }}>
-        UMS
-      </div>
-      <Menu
-        theme='dark'
-        defaultSelectedKeys={["1"]}
-        mode='inline'
-        items={SideBarItems(role)}
-      />
-    </Sider>
+        <div
+          style={{
+            color: "white",
+            fontSize: "2rem",
+            textAlign: "center",
+            fontWeight: "bold",
+            marginBottom: "1rem",
+          }}>
+          UMS
+        </div>
+        <Menu
+          theme='dark'
+          defaultSelectedKeys={["1"]}
+          mode='inline'
+          items={SideBarItems(role)}
+        />
+      </Sider>
+    // </div>
   );
 };
 

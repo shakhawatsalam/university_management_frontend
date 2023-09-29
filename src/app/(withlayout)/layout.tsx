@@ -3,9 +3,9 @@ import Contants from "@/components/ui/Contants";
 import Sidebar from "@/components/ui/Sidebar";
 import { isLoggedIn } from "@/services/auth.service";
 import { Layout } from "antd";
-import { Island_Moments } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Loading from "../loading";
 const DashBoardLayout = ({ children }: { children: React.ReactNode }) => {
   const userLoggedIn = isLoggedIn();
   const router = useRouter();
@@ -18,7 +18,7 @@ const DashBoardLayout = ({ children }: { children: React.ReactNode }) => {
     setIsLoading(true);
   }, [router, isLoading, userLoggedIn]);
   if (!isLoading) {
-    return <p>Loading</p>;
+    return <Loading />;
   }
 
   return (
